@@ -22,4 +22,6 @@
 
 ## Le rendu
 fr -> chaque échelon correspond a un fichier 
-
+   par exemple :
+        -> le fichier stepOne.py correspond a l'échelon 1, et s'éxecute :
+   	‘python3 stepOne.py‘ 
