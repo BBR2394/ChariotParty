@@ -1,10 +1,10 @@
-#Chariot Party
+# Chariot Party
 
-##Requirment
+## Requirment
 	en -> You need python version 3 for your OS
 	fr -> Vous aurez besoin de python en version 3
 
-##Description
+## Description
 	fr -> Le but du projet chariot party est de créer un jeu similaire a un celebre jeux de la marque Japonaise au celebre moustachu; ou les joueurs, ici des chariots, se deplace sur un plateau généré aléatoirement.
 	Le but est de récolter le plus de charbons, et surtout avec ces charbons de récupérer de l'or.
 	
@@ -16,6 +16,6 @@
 	4. si pendant son deplacement, il tombe sur la case correspondant au lingot d'or, il peut acheter cet OR si et seulement si il a réussi a récupérer au moins 10 hcarbons.
 
 
-##How to play
+## How to play
 	fr -> il suffit de lancer le script python avec la commande python :
 		‘python3 'leScript'.py‘
