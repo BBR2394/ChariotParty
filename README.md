@@ -18,3 +18,8 @@
 ## How to play
  fr -> il suffit de lancer le script python avec la commande python :
     ‘python3 'leScript'.py‘
+
+
+## Le rendu
+fr -> chaque échelon correspond a un fichier 
+
