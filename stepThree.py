@@ -2,7 +2,7 @@
 # @Author: Baptiste
 # @Date:   2019-09-17 13:21:41
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2019-09-20 15:48:00
+# @Last Modified time: 2019-09-22 23:07:03
 
 #!/usr/local/bin/python3
 
@@ -129,7 +129,6 @@ def effetCase(joueur, plateau):
 		glb_lst_player[joueur]['charbon'] -= 3
 		if glb_lst_player[joueur]['charbon'] < 0:
 			glb_lst_player[joueur]['charbon'] = 0
-	#elif plateau[glb_lst_player[joueur]['position']] == 3: #blue -> nothing
 
 def timer(tm):
 	sleep(tm)
@@ -210,7 +209,7 @@ def step_three():
 	configuration()
 	initialisation()
 	partie(nbTours, glb_lst_player)
-	#fprint_player_list(glb_lst_player)
+	#print_player_list(glb_lst_player)
 	free_program()
 
 step_three()

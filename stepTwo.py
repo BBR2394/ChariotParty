@@ -2,9 +2,9 @@
 # @Author: Baptiste
 # @Date:   2019-09-17 13:21:41
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2019-09-20 15:00:45
+# @Last Modified time: 2019-09-22 23:06:21
 
-#!/usr/local/bin/python3
+#! /usr/local/bin/python3
 
 from interface import *
 from random import randint
@@ -27,17 +27,10 @@ def gen_gold(nb_case, min):
 
 def game_loop():
 	print("the game loop")
-	input("wait for the end")
+	input("click enter to end the program")
 
 def free_program():
 	effacePlateau()
-
-#def step_one():
-#	creePlateau(step_one_plate)
-#	creeJoueurs(step_one_player, step_one_plate)
-#	placeOr(24, step_one_plate)
-#	game_loop()
-#	free_program()
 
 def gen_player(nb_player):
 	x = 0
@@ -45,7 +38,6 @@ def gen_player(nb_player):
 	for i in range(x, nb_player):
 		lst_player.append({'position' : 0, 'charbon' : 5, 'or' : 0, 'id' : x})
 		x += 1
-	print("list de dico des joueurs : ", lst_player)
 	return lst_player
 
 def checkNumberOfPlayers():
@@ -61,8 +53,7 @@ def checkNumberOfTurn():
 	nbTours = -1
 	while nbTours < 0:
 		nbTours = inputUInt("How many turn ? [at least 1] \n-> ")
-		#if nbJoueurs >= 100:
-		if nbTours < 1:
+		if nbTours < 1 :
 			print("-> incorect nb player, it is not valid, and must be between 1 and 4")
 			nbTours = -1
 	return nbTours
@@ -95,7 +86,7 @@ def step_two():
 	global nbTours, nbJoueurs, nbCases
 
 	config()
-	print("nb tour nb joueur et nb cases ", nbTours, nbJoueurs, nbCases)
+	print("Number of turn choosen, number of players, and numbers of cases", nbTours, nbJoueurs, nbCases)
 	lst_player = gen_player(nbJoueurs)
 	board_game = gen_plate(nbCases)
 	gold = gen_gold(nbCases, 1)
