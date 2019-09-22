@@ -1,8 +1,8 @@
 # Chariot Party
 
 ## Requirment
-	en -> You need python version 3 for your OS
-	fr -> Vous aurez besoin de python en version 3
+  en -> You need python version 3 for your OS
+  fr -> Vous aurez besoin de python en version 3
 
 ## Description
 	fr -> Le but du projet chariot party est de créer un jeu similaire à un celebre jeux de la marque Japonaise avec sa celebre mascotte moustachu; où les joueurs, ici des chariots, se déplace sur un plateau généré aléatoirement.
@@ -47,4 +47,3 @@
      -> le fichier stepFive.py correspond a l'échelon 5
      -> le fichier stepSix.py correspond a l'échelon 6
      -> le fichier stepSeven.py correspond a l'échelon 7
-
