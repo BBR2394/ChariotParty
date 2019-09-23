@@ -2,7 +2,7 @@
 # @Author: Baptiste Bertrand-Rapello
 # @Date:   2019-09-19 10:08:56
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2019-09-20 16:15:46
+# @Last Modified time: 2019-09-23 23:53:21
 
 #!/usr/local/bin/python3
 
@@ -10,29 +10,6 @@ from interfaceobjet import *
 from random import *
 from time import sleep
 from datetime import date, datetime
-
-#[{"position", "charbon", "or"}]
-#step_one_plate = [1, 1, 3, 3, 3, 2, 1, 3, 3, 1, 2, 3, 3, 3, 3, 1, 3, 3, 3, 3]
-#step_one_player = [ {'position' : 0, 'charbon' : 5, 'or' : 0}, 
-#					{'position' : 0, 'charbon' : 5, 'or' : 0}, 
-#					{'position' : 0, 'charbon' : 5, 'or' : 0}, 
-#					{'position' : 0, 'charbon' : 5, 'or' : 0}]
-
-test_five_player = [ {'position' : 1,'charbon' : 24, 'or' : 1, 'id' : 0}, 
-					 {'position' : 3,'charbon' : 5, 'or' : 1, 'id' : 1}, 
-					 {'position' : 6,'charbon' : 5, 'or' : 1, 'id' : 2}, 
-					 {'position' : 4,'charbon' : 1, 'or' : 0, 'id' : 3}]
-
-
-#nbJoueurs = 2
-#nbTours = 8
-#nbCases = 16
-
-#glb_lst_player = []
-#glb_plate = []
-#glb_gold = 0
-
-#glbLstPlayerObj = []
 
 class Joueur:
 
@@ -143,6 +120,9 @@ class Joueur:
 	def boughtGold(self):
 		self.charcoal -= 10
 		self.gold += 1
+
+	def addCharcoal(self, moreChar):
+		self.charcoal += moreChar
 
 class Case:
 	couleur = 0
@@ -267,6 +247,133 @@ class FabriqueCase:
 	def createYellowCase(self):
 		return CaseJaune()
 
+class Score:
+	dic_lst = []
+
+	def __init__(self):
+		print("init de Score")
+
+	def compScore(self, score1, score2):
+	 	if score1 > score2:
+	 		return 1
+	 	elif score1  < score2:
+	 		return -1
+	 	return 0
+
+	def order_score(self):
+		rtr = 0
+		if len(self.dic_lst) <= 1:
+			return True
+		i = 0
+		while i < len(self.dic_lst)-1:
+			rtr = self.compScore(self.dic_lst[i]['score'], self.dic_lst[i+1]['score'])
+			if rtr == 1:
+				first = self.dic_lst.pop(i)
+				second = self.dic_lst.pop(i)
+				self.dic_lst.insert(i, first)
+				self.dic_lst.insert(i, second)
+				i = 0
+			else :
+				i += 1
+
+	#si il y a le meme score, la variable rtr sera mise a 'True'
+	# et donc en arrivant a la fin de la liste, si 'bigger' n'a pas changé et que rtr est toujours égale a True
+	# cela veut dire que le plus haut score est présent plusieurs fois
+	def isEquality(self):
+		bigger = 0
+		rtr = False
+		for i in range(len(self.dic_lst)):
+			if self.dic_lst[i]['score'] > bigger:
+				bigger = self.dic_lst[i]['score']
+				rtr = False
+			elif self.dic_lst[i]['score'] == bigger:
+				rtr = True
+		return rtr
+
+	def addScore(self, id, score):
+		self.dic_lst.append({'id':id, 'score':score})
+
+	def getIdWinner(self):
+		self.order_score()
+		return self.dic_lst[-1]['id']
+
+	def getListOfEqualityPlayer(self):
+		self.order_score()
+		#on boucle de la fin au debut
+		x = len(self.dic_lst)
+		equality_list = []
+		bigger = self.dic_lst[-1]['score']
+		while x > 0:
+			x -= 1
+			if self.dic_lst[x]['score'] != bigger:
+				break
+			equality_list.append(self.dic_lst[x]['id'])
+		return equality_list
+
+	def printScoreList(self):
+		print(self.dic_lst)
+
+class MiniGame:
+	score = []
+	game_score = Score()
+
+	def __init__(self):
+	 	print("init de minigame")
+	 	game_score = Score()
+
+	def HigherDice(self, lst_player, dice):
+	 	score = []
+	 	print("---------------")
+	 	print("* Higher Dice *")
+	 	print("---------------")
+	 	print("règles : chaque joueur lance un dé, et celui qui obtient le plus gros score gagne 7 charbons supplémentaire")
+	 	input("prêt ?")
+	 	for i in range(len(lst_player)):
+	 		self.game_score.addScore(i, dice.OneTimeThrowDice())
+	 	print("LES SCORES")
+	 	self.game_score.order_score()
+	 	if self.game_score.isEquality() == True:
+	 		print("Il y a une équalité !")
+	 		print("Plusieurs joueur vont recevoir un prix !!")
+	 		equality_list = self.game_score.getListOfEqualityPlayer()
+	 		print("les joueurs a egalité : ", end='')
+	 		for i in range(len(equality_list)):
+	 			print("n°", lst_player[i].getId(), end=' ')
+	 			lst_player[i].addCharcoal(7)
+	 		print(" ")
+	 	else :
+	 		print("Bravo au Joueur ", self.game_score.getIdWinner()+1, " qui gagne 7 charbons")
+	 		lst_player[self.game_score.getIdWinner()].addCharcoal(7)
+
+	def chooseAMiniGame(self, lst_player, dice):
+		self.HigherDice(lst_player, dice)
+		#self.anotherMiniGame()
+
+class Dice:
+	size = 0
+	lastThrow = -1
+	multipleThrow  = []
+	numberOfThrow = 0
+
+	def __init__(self, givenSize):
+		print("dice created")
+		self.size = givenSize
+		print("dice with ", self.size, " faces")
+
+	def OneTimeThrowDice(self):
+		self.lastThrow = randint(1, self.size)
+		return self.lastThrow
+
+	#si on veut rajouter comme option de le lancer plusieurs fois
+	def MultipleTimeThrowDice(self, numberOfThrow):
+		self.multipleThrow = []
+		for i in range(numberOfThrow):
+			self.multipleThrow.append(self.OneTimeThrowDice())
+		return self.multipleThrow
+
+	def getSize(self):
+		return self.size
+
 class Plateau:
 	lstCase = []
 	lstJoueur = []
@@ -274,25 +381,30 @@ class Plateau:
 	number_turn = 0
 	number_player = 0
 	number_case = 0
+	number_dice_size = 0
 	factory = None
 	the_timer = 0.01
+	dice = None
+	mini_game = None
 
-	def __init__(self, nbTours, nbJoueurs, nbCases):
+	def __init__(self, nbTours, nbJoueurs, nbCases, nbDiceSize):
 		self.number_turn = nbTours
 		self.number_player = nbJoueurs
 		self.number_case = nbCases
+		self.number_dice_size = nbDiceSize
 		self.factory = FabriqueCase()
+		self.dice = Dice(nbDiceSize)
+		self.mini_game = MiniGame()
 		self.initBoard()
 		self.initPlayer()
 		self.initGold()
 		self.createBoard()
+		print("$> when plateau is init : ", self.number_turn, " , ", self.number_case, " , ", self.number_player, " , ", self.dice.getSize())
 
 
 	def initBoard(self):
 		for i in range(self.number_case):
 			self.lstCase.append(self.factory.create(0))
-			#self.lstCase.append(self.factory.create(self.gen_case(0)))
-			#self.addCase()
 		print("le plateau est composé de ", self.boardSize(), " cases")
 
 	def initPlayer(self):
@@ -323,9 +435,9 @@ class Plateau:
 	def boardSize(self):
 		return len(self.lstCase)
 
-	def lanceDe(self, nbFaces):
-		dice = randint(1, nbFaces)
-		return dice
+	#def lanceDe(self, nbFaces):
+	#	dice = randint(1, nbFaces)
+	#	return dice
 
 	def check_same_position_gold_player(self):
 		for i in self.lstJoueur:
@@ -381,7 +493,7 @@ class Plateau:
 			self.timer(self.the_timer)
 
 	def tourJoueur(self, joueur):
-		dice_result = self.lanceDe(6)
+		dice_result = self.dice.OneTimeThrowDice()
 		print("Le resultat du de\n-> : ", dice_result)
 		self.deplaceJoueur(joueur.getId(), dice_result)
 		#event according to the case when the player stop
@@ -397,7 +509,8 @@ class Plateau:
 		for j in range(self.number_turn):
 			print("TOUR NUMERO : ", j)
 			self.tourDeJeu()
-			#turn_x += 1
+			self.mini_game.chooseAMiniGame(self.lstJoueur, self.dice)
+
 
 	def compJoueursObj(self, joueur1, joueur2):
 		if joueur1 <= joueur2:
@@ -421,6 +534,7 @@ class Plateau:
 				i += 1
 
 	def afficheClassement(self):
+		print("=> The game is over <=")
 		today = date.today()
 		nb_player = len(self.lstJoueur)
 		for i in self.lstJoueur:
@@ -462,11 +576,13 @@ class Configuration:
 	nbTours = 0
 	nbJoueurs = 0
 	nbCases = 0
+	nbDiceSize = 0
 
 	def __init__(self):
 		self.checkNumberOfPlayers()
 		self.checkNumberOfTurn()
 		self.checkNumberOfCases()
+		self.checkDiceSize()
 
 	def checkNumberOfCases(self):
 		self.nbCases = -1
@@ -495,6 +611,15 @@ class Configuration:
 				self.nbTours = -1
 		return self.nbTours
 	
+	def checkDiceSize(self):
+		self.nbDiceSize = -1
+		while self.nbDiceSize < 0:
+			self.nbDiceSize = self.inputInt("Avec combien de face souhaitez vous votre dé ? Un nombre entre 6 et 20 \n-> ")
+			if self.nbDiceSize < 6 or self.nbDiceSize > 20:
+				print("-> nombre de face incorect : il doit etre entre 6 et 20")
+				self.nbDiceSize = -1
+		return self.nbDiceSize
+
 	def inputInt(self, question):
 		nb = input(question)
 		try : 
@@ -514,11 +639,13 @@ class Configuration:
 	def getNbCases(self):
 		return self.nbCases
 
+	def getNbSizeDice(self):
+		return self.nbDiceSize
 
 def main():	
 	print("WELCOME to chariot-party")
 	config = Configuration()
-	game = Plateau(config.getNbTour(), config.getNbJoueur(), config.getNbCases())
+	game = Plateau(config.getNbTour(), config.getNbJoueur(), config.getNbCases(), config.getNbSizeDice())
 	game.play()
 
 main()

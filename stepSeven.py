@@ -2,7 +2,7 @@
 # @Author: Baptiste Bertrand-Rapello
 # @Date:   2019-09-19 10:08:56
 # @Last Modified by:   Baptiste Bertrand-Rapello
-# @Last Modified time: 2019-09-20 16:15:46
+# @Last Modified time: 2019-09-23 23:53:42
 
 #!/usr/local/bin/python3
 
@@ -11,31 +11,7 @@ from random import *
 from time import sleep
 from datetime import date, datetime
 
-#[{"position", "charbon", "or"}]
-#step_one_plate = [1, 1, 3, 3, 3, 2, 1, 3, 3, 1, 2, 3, 3, 3, 3, 1, 3, 3, 3, 3]
-#step_one_player = [ {'position' : 0, 'charbon' : 5, 'or' : 0}, 
-#					{'position' : 0, 'charbon' : 5, 'or' : 0}, 
-#					{'position' : 0, 'charbon' : 5, 'or' : 0}, 
-#					{'position' : 0, 'charbon' : 5, 'or' : 0}]
-
-test_five_player = [ {'position' : 1,'charbon' : 24, 'or' : 1, 'id' : 0}, 
-					 {'position' : 3,'charbon' : 5, 'or' : 1, 'id' : 1}, 
-					 {'position' : 6,'charbon' : 5, 'or' : 1, 'id' : 2}, 
-					 {'position' : 4,'charbon' : 1, 'or' : 0, 'id' : 3}]
-
-
-#nbJoueurs = 2
-#nbTours = 8
-#nbCases = 16
-
-#glb_lst_player = []
-#glb_plate = []
-#glb_gold = 0
-
-#glbLstPlayerObj = []
-
 class Joueur:
-
 	position = 0
 	id = 0
 	charcoal = 5
