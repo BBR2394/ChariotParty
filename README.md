@@ -22,12 +22,12 @@
   * et le nombre de case pour le plateau : 4, 8, 12, 16 ou 20  
  - à partir de l'étape 3, le jeu joue tout seul, au tour par tour.  
     Il y a un affichage de ce qui se passe dans l'éxecution : 
-    	-le tour X  
-    	-le joueur X de jouer  
-    	-le résultat du lancé de dé  
-    	-et si le joueur passe sur une case avec un lingot  
-    		+affichage du nombre de charbon  
-    		+demande pour acheter un lingot. Si et seulement si le joueur en a assez pour en acheter (il faut 10 charbons)  
+    	- le tour X  
+    	- le joueur X de jouer  
+    	- le résultat du lancé de dé  
+    	- et si le joueur passe sur une case avec un lingot  
+    		+ affichage du nombre de charbon  
+    		+ demande pour acheter un lingot. Si et seulement si le joueur en a assez pour en acheter (il faut 10 charbons)  
 - à partir de l'étape 4, le jeu affiche les résultats et les exporte dans un fichier. si il y a une erreur lors de l'ouverture et/ou écriture du fichier, aucun fichier n'est créé.  
 - à partir de l'étape 5 les changement sont avant tout interne : le code passe de l'impératif, a la programmation orienté objet  
 - à l'étape 6, il y a un nouveau type de case : les case jaunes qui donne 10 charbons  
