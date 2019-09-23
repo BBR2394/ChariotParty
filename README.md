@@ -13,36 +13,36 @@
  3. selon la case sur laquelle le joueur tombe, soit il gagne du charbon (les cases vertes) soit il en pert (les cases rouge) soit rien ne se passe.
  4. si pendant son deplacement, il tombe sur la case correspondant au lingot d'or, il peut acheter cet OR si et seulement si il a réussi a récupérer au moins 10 hcarbons.
 
-
-## Comment Jouer
-    -> il suffit de lancer le script python avec la commande python :
-		‘python3 'leScript'.py‘
-    -> pour toutes les étapes, on lance le script, et le jeu se lance avec une fenetre de jeu.
-    -> à partir de l'étape 2, le teminal/invite de commande, demande a l'utilisateur :
-      - le nombre de joueurs voulus : un nombre entre 1 et 4
-      - le nombre de tour de jeu : au moins 1 tour.
-      - et le nombre de case pour le plateau : 4, 8, 12, 16 ou 20
-    -> à partir de l'étape 3, le jeu joue tout seul, au tour par tour. Il y a un affichage de ce qui se passe dans l'éxecution : 
-    	- le tour X
-    	- le joueur X de jouer
-    	- le résultat du lancé de dé
-    	- et si le joueur passe sur une case avec un lingot
-    		- affichage du nombre de charbon
-    		- demande pour acheter un lingot. Si et seulement si le joueur en a assez pour en acheter (il faut 10 charbons)
-    -> à partir de l'étape 4, le jeu affiche les résultats et les exporte dans un fichier. si il y a une erreur lors de l'ouverture et/ou écriture du fichier, aucun fichier n'est créé.
-    -> à partir de l'étape 5 les changement sont avant tout interne : le code passe de l'impératif, a la programmation orienté objet
-    -> à l'étape 6, il y a un nouveau type de case : les case jaunes qui donne 10 charbons
-    -> à l'étape 7, les cases sont généré non plus totalement aléatoirement mais selon un calcul aléatoire en fonction d'un pourcentage d'apparition.
+## How to play
+ fr -> il suffit de lancer le script python avec la commande python :  
+		‘python3 'leScript'.py‘  
+    -> pour toutes les étapes, on lance le script, et le jeu se lance avec une fenetre de jeu.  
+    -> à partir de l'étape 2, le teminal/invite de commande, demande a l'utilisateur :  
+      - le nombre de joueurs voulus : un nombre entre 1 et 4  
+      - le nombre de tour de jeu : au moins 1 tour.  
+      - et le nombre de case pour le plateau : 4, 8, 12, 16 ou 20  
+    -> à partir de l'étape 3, le jeu joue tout seul, au tour par tour.  
+    Il y a un affichage de ce qui se passe dans l'éxecution : 
+    	- le tour X  
+    	- le joueur X de jouer  
+    	- le résultat du lancé de dé  
+    	- et si le joueur passe sur une case avec un lingot  
+    		- affichage du nombre de charbon  
+    		- demande pour acheter un lingot. Si et seulement si le joueur en a assez pour en acheter (il faut 10 charbons)  
+    -> à partir de l'étape 4, le jeu affiche les résultats et les exporte dans un fichier. si il y a une erreur lors de l'ouverture et/ou écriture du fichier, aucun fichier n'est créé.  
+    -> à partir de l'étape 5 les changement sont avant tout interne : le code passe de l'impératif, a la programmation orienté objet  
+    -> à l'étape 6, il y a un nouveau type de case : les case jaunes qui donne 10 charbons  
+    -> à l'étape 7, les cases sont généré non plus totalement aléatoirement mais selon un calcul aléatoire en fonction d'un pourcentage d'apparition.  
 
 ## Découpage des échelons
-   fr -> Chaque fichier correspond a un échelon:
-    -> le fichier stepOne.py correspond a l'échelon 1
-    -> le fichier stepTwo.py correspond a l'échelon 2
-    -> le fichier stepThree.py correspond a l'échelon 3
-    -> le fichier stepFour.py correspond a l'échelon 4
-    -> le fichier stepFive.py correspond a l'échelon 5
-    -> le fichier stepSix.py correspond a l'échelon 6
-    -> le fichier stepSeven.py correspond a l'échelon 7
+   fr -> Chaque fichier correspond a un échelon:  
+    -> le fichier stepOne.py correspond a l'échelon 1  
+    -> le fichier stepTwo.py correspond a l'échelon 2  
+    -> le fichier stepThree.py correspond a l'échelon 3  
+    -> le fichier stepFour.py correspond a l'échelon 4  
+    -> le fichier stepFive.py correspond a l'échelon 5  
+    -> le fichier stepSix.py correspond a l'échelon 6  
+    -> le fichier stepSeven.py correspond a l'échelon 7  
 
 ## Bonus
 	Le jeu avec bonus se trouve dans le dossier eponyme : BONUS  
