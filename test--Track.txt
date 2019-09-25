@@ -1,1 +1,0 @@
-ceci est un test pour la branch test et pour tester le git checkout -b test --track origin/test 
